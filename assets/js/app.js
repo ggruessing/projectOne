@@ -63,9 +63,15 @@ function send() {
 			// setResponse(JSON.stringify(data, undefined, 2));
 			var dataResult = data.result.fulfillment.speech;
 			if (dataResult === "") {
+
+				if(data.result.parameters.action==="weather"){
 				var city = data.result.parameters.address.city;
 				getWeather(city);
-			}
+				}
+				else if(data.result.action==="search")
+				var keyWord = data.result.contexts[0].parameters.q
+				getAnswers(keyWord)
+				}
 			else {
 				setResponse(dataResult, "Cathy");
 				console.log(data);
@@ -101,4 +107,26 @@ function getWeather(city) {
 		// console.log(results);
 		setResponse("The current weather in " + city + " is " + results + " &deg;F");
 	});
+}
+
+function getAnswers(){
+	var APIKey = "3TVWEP-L6J4Y652JG";
+
+    var queryURL = "https://api.wolframalpha.com/v1/result?i="+keyWord+"%3F&appid="+APIKey
+ 
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+  
+      .done(function(response) {
+      	var results = response.data
+
+        console.log(queryURL);
+
+        console.log(response);
+
+        $("#response").text(response)
+    })
+
 }
