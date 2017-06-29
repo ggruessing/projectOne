@@ -63,15 +63,17 @@ function send() {
 			// setResponse(JSON.stringify(data, undefined, 2));
 			var dataResult = data.result.fulfillment.speech;
 			if (dataResult === "") {
+				console.log(data.result)
+				if(data.result.action==="weather"){
+				keyWord = data.result.parameters.address.city;
+				getWeather();
+				}
+				else if(data.result.action==="web.search"){
+				keyWord = data.result.parameters.q
+				getAnswers()
+				}
+			}
 
-				if(data.result.parameters.action==="weather"){
-				var city = data.result.parameters.address.city;
-				getWeather(city);
-				}
-				else if(data.result.action==="search")
-				var keyWord = data.result.contexts[0].parameters.q
-				getAnswers(keyWord)
-				}
 			else {
 				setResponse(dataResult, "Cathy");
 				console.log(data);
@@ -91,13 +93,13 @@ function setResponse(val, name) {
 	$("#response").append("<strong>" + name + ":</strong> " + val + "<br>");
 }  
 
-function getWeather(city) {
-	if (!city) {
-		city = "San Francisco";
+function getWeather() {
+	if (!keyWord) {
+		keyWord = "San Francisco";
 	}
 	var results;
 	var weatherApiKey = "7c82af881ec1e1081a5cd2d5a1c75e03";
-	var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city +
+	var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + keyWord +
 		"&units=imperial&appid=" + weatherApiKey;
 	$.ajax({
     url: queryURL,
@@ -105,21 +107,25 @@ function getWeather(city) {
   }).done(function(response) {
 		results = response.main.temp;
 		// console.log(results);
-		setResponse("The current weather in " + city + " is " + results + " &deg;F");
+		setResponse("The current weather in " + keyWord + " is " + results + " &deg;F");
 	});
 }
 
 function getAnswers(){
 	var APIKey = "3TVWEP-L6J4Y652JG";
 
+	keyWord = keyWord.replace(/ /g,"+")
+
     var queryURL = "https://api.wolframalpha.com/v1/result?i="+keyWord+"%3F&appid="+APIKey
  
     $.ajax({
         url: queryURL,
-        method: "GET"
+        method: "GET",
+        dataType: 'jsonp'
       })
   
       .done(function(response) {
+      
       	var results = response.data
 
         console.log(queryURL);
