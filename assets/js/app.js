@@ -16,19 +16,17 @@ var keyWord = "none";
 var accessToken = "ecb2965ee6da42df92c8ab68408dbb69";
 var baseUrl = "https://api.api.ai/api/";
 
-$(document).ready(function() {
-	$("#input").keypress(function(event) {
-				
-		if (event.which == 13) {
-			event.preventDefault();
-			send();
-		}
-	});
+var text;
+
+$("#message-submit").on("click", function() {
+	event.preventDefault();
+	text = $("#input").val();
+	$("#input").val("");
+	console.log(text);
+	send();
 });
 
 function send() {
-	var text = $("#input").val();
-	$("#input").val("");
 	$.ajax({
 		type: "POST",
 		url: baseUrl + "query?v=20150910",

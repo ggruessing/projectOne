@@ -10,17 +10,22 @@
 </head>
 <body>
 
-<div class="container">
-  <div class="row" id="lol">
-  <div>
-    
-    <br>Response<br> <textarea id="response" cols="40" rows="5"></textarea>
-    <br>
-    <input id="input" type="text"> Press Enter To Chat
+  <div class="container">
+    <div class="row" id="lol">
+    <div>
+      
+      <br>Response<br> <textarea id="response" cols="40" rows="5"></textarea>
+      <br>
+      <form class="form-inline">
+        <label class="sr-only" for="input">Message</label>
+        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="input">
+        <button type="submit" class="btn btn-primary" id="message-submit">Submit</button>
+      </form>
 
+    </div>
+    </div>
   </div>
-  </div>
-</div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
   <script type="text/javascript" src="assets/js/app.js"></script>
