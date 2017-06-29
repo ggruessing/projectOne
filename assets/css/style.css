@@ -1,0 +1,10 @@
+body {
+  text-align: center;
+}
+
+#response {
+  text-align: left;
+  height: 300px;
+  border: 1px solid #000;
+  overflow-y: scroll;
+}
