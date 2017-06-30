@@ -18,7 +18,6 @@ var baseUrl = "https://api.api.ai/api/";
 var text;
 var name;
 var intro = true;
-var returnUser = false;
 
 var connected = database.ref(".info/connected")
 
@@ -37,7 +36,6 @@ var connected = database.ref(".info/connected")
 function setFirebaseUser(name) {
   database.ref().child(name).once('value').then(function(snapshot) {
     if (snapshot.val()) {
-      returnUser = true;
       setResponse("Welcome back, " + text + "! How can I help you?");
     }
     else {
