@@ -18,20 +18,37 @@ var baseUrl = "https://api.api.ai/api/";
 var text;
 var name;
 var intro = true;
+var returnUser = false;
 
 var connected = database.ref(".info/connected")
 
-connected.on("value",function(snap){
-    if(snap.val()){
-      var con = database.ref().child(name).set({
-      	name
-      })
+// connected.on("value",function(snap){
+//   if (intro) {
+//     if(snap.val()){
+//       var con = database.ref().child(name).set({
+//       	name
+//       })
     
-      // con.onDisconnect().remove()
+//       // con.onDisconnect().remove()
+//     }
+//   }
+// });
 
-
+function setFirebaseUser(name) {
+  database.ref().child(name).once('value').then(function(snapshot) {
+    if (snapshot.val()) {
+      returnUser = true;
+      setResponse("Welcome back, " + text + "! How can I help you?");
     }
-  })
+    else {
+      database.ref().child(name).set({
+        name
+      });
+      setResponse("Hello, " + text + "! How can I help you?");
+    }
+    // console.log(snapshot.val());
+  });
+}
 
 function getIntro() {
 	var welcome = "Welcome, what is your name?";
@@ -59,15 +76,7 @@ $("#message-submit").on("click", function() {
   	if (intro) {
   		intro = false;
   		name = text;
-  		setResponse("Hello, " + text + "! How can I help you?");
-  		connected.on("value",function(snap){
-    	if(snap.val()){
-      		var con = database.ref().child(name).set({
-      		name
-      	})
-      // con.onDisconnect().remove()
-    }
-  })
+      setFirebaseUser(name);
   	}
   	else {
   		console.log(text);
