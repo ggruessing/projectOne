@@ -1,10 +1,72 @@
+html, body {
+  height: 100%;
+}
+
 body {
+  background-color: lightblue; 
   text-align: center;
+  background-image: url("http://i.imgur.com/aIcON07.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+#lol {
+  margin-top: 10%;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-family: 'Baloo Bhaina', cursive;
 }
 
 #response {
+  box-sizing:border-box;
   text-align: left;
+  padding: 10px;
   height: 300px;
-  border: 1px solid #000;
-  overflow-y: scroll;
+  border-radius: 5px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.35);
+  margin-bottom: 10px;
+  margin-right: 0;
+  margin-left: 0;
+  word-wrap: break-word;
+}
+
+#input {
+  background: rgba(0, 0, 0, 0.35); 
+  width: 480px;"
+  color: #fff;
+}
+
+.flexscroll{
+  width: hidden;
+  height:200px;
+  overflow:scroll;
+  overflow-x: hidden;
+}
+
+.flexscroll{
+  scrollbar-face-color: #FFFFFF;
+  scrollbar-shadow-color: #FFFFFF;
+  scrollbar-highlight-color: #FFFFFF;
+  scrollbar-3dlight-color: #FFFFFF;
+  scrollbar-darkshadow-color: #FFFFFF;
+  scrollbar-track-color: #FFFFFF;
+  scrollbar-arrow-color: #FFFFFF;
+}
+
+/* Let's get this party started */
+.flexscroll::-webkit-scrollbar {
+  width: 12px;
+}
+ 
+/* Handle */
+.flexscroll::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(163, 163, 163, 0.4); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
