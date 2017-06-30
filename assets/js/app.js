@@ -19,6 +19,20 @@ var text;
 var name;
 var intro = true;
 
+var connected = database.ref(".info/connected")
+
+connected.on("value",function(snap){
+    if(snap.val()){
+      var con = database.ref().child(name).set({
+      	name
+      })
+    
+      con.onDisconnect().remove()
+
+
+    }
+  })
+
 function getIntro() {
 	var welcome = "Welcome, what is your name?";
 	setResponse(welcome);
