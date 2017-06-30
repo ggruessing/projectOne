@@ -113,17 +113,20 @@ function getWeather() {
 
 function getAnswers() {
 	var APIKey = "3TVWEP-L6J4Y652JG";
-	keyWord = keyWord.replace(/ /g,"+")
-  var queryURL = "https://api.wolframalpha.com/v1/result?i=" + keyWord + "%3F&appid=" + APIKey;
+	keyWord = keyWord.replace(/ /g,"+");
+  // console.log(keyWord);
+  var queryURL = "https://cors-anywhere.herokuapp.com/https://api.wolframalpha.com/v1/result?i=" + keyWord + "%3F&appid=" + APIKey;
  
   $.ajax({
     url: queryURL,
     method: "GET",
-    dataType: 'json'
   }).done(function(response) {
-  	var results = response.data
-    console.log(queryURL);
-    console.log(response);
-    $("#response").text(response)
+    // console.log(queryURL);
+    setResponse(response);
+  }).fail(function(response) {
+    // console.log(response);
+    if (response.status === 501) {
+      setResponse("I'm sorry. I don't have a response for that.");
+    }
   });
 }
