@@ -37,19 +37,22 @@ setInterval(function(){
 
 $("#message-submit").on("click", function() {
 	event.preventDefault();
-	text = $("#input").val();
-	$("#input").val("");
 
-	if (intro) {
-		intro = false;
-		name = text;
-		setResponse("Hello, " + text + "! How can I help you?");
-	}
-	else {
-		console.log(text);
-		setResponse(text, name);
-		send();
-	}
+	text = $("#input").val();
+  if (text) {
+  	$("#input").val("");
+
+  	if (intro) {
+  		intro = false;
+  		name = text;
+  		setResponse("Hello, " + text + "! How can I help you?");
+  	}
+  	else {
+  		console.log(text);
+  		setResponse(text, name);
+  		send();
+  	}
+  }
 });
 
 function send() {
