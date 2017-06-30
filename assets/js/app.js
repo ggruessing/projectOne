@@ -115,7 +115,7 @@ function getAnswers() {
 	var APIKey = "3TVWEP-L6J4Y652JG";
 	keyWord = keyWord.replace(/ /g,"+");
   // console.log(keyWord);
-  var queryURL = "https://cors-anywhere.herokuapp.com/https://api.wolframalpha.com/v1/result?i=" + keyWord + "%3F&appid=" + APIKey;
+  var queryURL = "https://crossorigin.me/https://api.wolframalpha.com/v1/result?i=" + keyWord + "%3F&appid=" + APIKey;
  
   $.ajax({
     url: queryURL,
