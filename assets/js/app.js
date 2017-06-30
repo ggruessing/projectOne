@@ -121,10 +121,10 @@ function getAnswers() {
     url: queryURL,
     method: "GET",
   }).done(function(response) {
-    console.log(queryURL);
+    // console.log(queryURL);
     setResponse(response);
   }).fail(function(response) {
-    console.log(response);
+    // console.log(response);
     if (response.status === 501) {
       setResponse("I'm sorry. I don't have a response for that.");
     }
