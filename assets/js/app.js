@@ -21,40 +21,34 @@ var intro = true;
 
 var connected = database.ref(".info/connected")
 
-// connected.on("value",function(snap){
-//   if (intro) {
-//     if(snap.val()){
-//       var con = database.ref().child(name).set({
-//       	name
-//       })
-    
-//       // con.onDisconnect().remove()
-//     }
-//   }
-// });
-
+// Check database for user
 function setFirebaseUser(name) {
+
+  var time = moment().format('MMM D YYYY, h:mm:ss a');
+
   database.ref().child(name).once('value').then(function(snapshot) {
     if (snapshot.val()) {
-      setResponse("Welcome back, " + text + "! How can I help you?");
+      setResponse("Welcome back, " + text + "! Your last visit was " + 
+        snapshot.val().time + ". How can I help you?");
+      database.ref().child(name).set({
+        name: name,
+        time: time
+      });
     }
     else {
       database.ref().child(name).set({
-        name
+        name: name,
+        time: time
       });
       setResponse("Hello, " + text + "! How can I help you?");
     }
-    // console.log(snapshot.val());
   });
 }
 
-function getIntro() {
-	var welcome = "Welcome, what is your name?";
-	setResponse(welcome);
-}
-
+// Welcome user on page load
 if (intro) {
-	getIntro();
+	var welcome = "Welcome, what is your name?";
+  setResponse(welcome);
 }
 
 // Keep scrollbar at bottom
@@ -99,7 +93,6 @@ function send() {
 			sessionId: "testBot"
 		}),
 		success: function(data) {
-			// setResponse(JSON.stringify(data, undefined, 2));
 			var dataResult = data.result.fulfillment.speech;
 			if (dataResult === "") {
 				console.log(data.result)
