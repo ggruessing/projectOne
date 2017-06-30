@@ -27,7 +27,7 @@ connected.on("value",function(snap){
       	name
       })
     
-      con.onDisconnect().remove()
+      // con.onDisconnect().remove()
 
 
     }
@@ -60,6 +60,14 @@ $("#message-submit").on("click", function() {
   		intro = false;
   		name = text;
   		setResponse("Hello, " + text + "! How can I help you?");
+  		connected.on("value",function(snap){
+    	if(snap.val()){
+      		var con = database.ref().child(name).set({
+      		name
+      	})
+      // con.onDisconnect().remove()
+    }
+  })
   	}
   	else {
   		console.log(text);
