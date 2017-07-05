@@ -15,8 +15,8 @@ var keyWord = "none";
 var accessToken = "ecb2965ee6da42df92c8ab68408dbb69";
 var baseUrl = "https://api.api.ai/api/";
 
-var text;
-var name;
+var text; // user's input
+var name; // user's name
 var firstVisit = true;
 
 var connected = database.ref(".info/connected")
@@ -50,13 +50,6 @@ if (firstVisit) {
 	var welcome = "Welcome, what is your name?";
   setResponse(welcome);
 }
-
-// Keep scrollbar at bottom
-var textarea = document.getElementById('response');
-setInterval(function(){
-    textarea.value += Math.random()+'\n';
-    textarea.scrollTop = textarea.scrollHeight;
-});
 
 $("#message-submit").on("click", function() {
 	event.preventDefault();
@@ -127,9 +120,9 @@ function setResponse(val, name) {
   // We put the repsonse div in a jquery object. Scrollheight is pure Javascript, so in order to call it, 
   // we have to extract the pure Javascript html element by using [0]. We then call scrollHeight on it. 
   // This returns the height of the scroll track. 
-  var scrollHeight = $("#response")[0].scrollHeight 
+  var scrollHeight = $("#response")[0].scrollHeight;
   // We then put respoonse div in a jquery object and set it's scroll top to be the scroll Height. 
-  $("#response").scrollTop(scrollHeight)
+  $("#response").scrollTop(scrollHeight);
 }  
 
 function getWeather() {
