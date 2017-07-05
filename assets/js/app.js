@@ -97,6 +97,10 @@ function send() {
   				keyWord = data.result.parameters.q
   				getAnswers()
 				}
+        else if (data.result.action === "delivery.search") {
+          keyWord = data.result.parameters.product
+          getCooking()
+        }
 			}
 
 			else {
@@ -161,3 +165,25 @@ function getAnswers() {
     }
   });
 }
+
+function getCooking () {
+  console.log("Awesome")
+  $.ajax({
+    type: "GET",
+    url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients="+keyWord+"limitLicense=false&number=1&ranking=1",
+    dataType: "json",
+    headers: {'X-Mashape-Key': 'm4zJZuWJy2mshhO2dtF7o0KquTb2p1qmP3cjsndgXgNyhJsj9a' 
+      // 'Accept: application/json' 
+  }
+  }).done(function(response) {
+    results = response
+    console.log(results[0].title);
+    setResponse("With: " + keyWord + ". you can make: " + results[0].title);
+
+     
+    }).fail(function() {
+      setResponse("Ouch. I broke :(");
+    })
+  
+  // setResponse("Pondering...");
+}  
