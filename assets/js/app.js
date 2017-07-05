@@ -94,12 +94,12 @@ function send() {
   				getWeather();
 				}
 				else if (data.result.action === "web.search") {
-  				keyWord = data.result.parameters.q
-  				getAnswers()
+  				keyWord = data.result.parameters.q;
+  				getAnswers();
 				}
         else if (data.result.action === "delivery.search") {
-          keyWord = data.result.parameters.product
-          getCooking()
+          keyWord = data.result.parameters.product;
+          getCooking();
         }
 			}
 
@@ -176,7 +176,7 @@ function getCooking () {
       // 'Accept: application/json' 
     }
   }).done(function(response) {
-    results = response
+    results = response;
     // console.log(results[0].title);
     setResponse("With: " + keyWord + ". you can make: " + results[0].title);
   }).fail(function() {
