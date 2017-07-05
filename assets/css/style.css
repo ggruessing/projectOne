@@ -5,7 +5,7 @@ html, body {
 body {
   background-color: lightblue; 
   text-align: center;
-  background-image: url("http://i.imgur.com/aIcON07.gif");
+  background-image: url("waterandshit.gif");
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
@@ -17,7 +17,7 @@ body {
 
 h1 {
   text-align: center;
-  font-family: 'Baloo Bhaina', cursive;
+  font-family: 'Dhurjati', sans-serif;
 }
 
 #response {
