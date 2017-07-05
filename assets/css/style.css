@@ -45,13 +45,13 @@ h1 {
 }
 
 .flexscroll{
-  scrollbar-face-color: #FFFFFF;
-  scrollbar-shadow-color: #FFFFFF;
-  scrollbar-highlight-color: #FFFFFF;
-  scrollbar-3dlight-color: #FFFFFF;
-  scrollbar-darkshadow-color: #FFFFFF;
-  scrollbar-track-color: #FFFFFF;
-  scrollbar-arrow-color: #FFFFFF;
+  scrollbar-face-color: #fff;
+  scrollbar-shadow-color: #fff;
+  scrollbar-highlight-color: #fff;
+  scrollbar-3dlight-color: #fff;
+  scrollbar-darkshadow-color: #fff;
+  scrollbar-track-color: #fff;
+  scrollbar-arrow-color: #fff;
 }
 
 .flexscroll::-webkit-scrollbar {

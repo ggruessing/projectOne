@@ -66,7 +66,6 @@ function send() {
 			sessionId: "testBot"
 		}),
 		success: function(data) {
-			// setResponse(JSON.stringify(data, undefined, 2));
 			var dataResult = data.result.fulfillment.speech;
 			if (dataResult === "") {
 				console.log(data.result)
