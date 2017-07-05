@@ -11,18 +11,16 @@ body {
   color: #fff;
 }
 
-#lol {
+#header {
   margin-top: 10%;
 }
 
 h1 {
-  color: white;
   text-align: center;
   font-family: 'Baloo Bhaina', cursive;
 }
 
 #response {
-  box-sizing:border-box;
   text-align: left;
   padding: 10px;
   height: 300px;
@@ -30,21 +28,19 @@ h1 {
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.35);
   margin-bottom: 10px;
-  margin-right: 0;
-  margin-left: 0;
   word-wrap: break-word;
 }
 
 #input {
   background: rgba(0, 0, 0, 0.35); 
-  width: 480px;"
+  width: 100%;
   color: #fff;
 }
 
 .flexscroll{
   width: hidden;
-  height:200px;
-  overflow:scroll;
+  height: 200px;
+  overflow: scroll;
   overflow-x: hidden;
 }
 
@@ -58,12 +54,10 @@ h1 {
   scrollbar-arrow-color: #FFFFFF;
 }
 
-/* Let's get this party started */
 .flexscroll::-webkit-scrollbar {
   width: 12px;
 }
  
-/* Handle */
 .flexscroll::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
