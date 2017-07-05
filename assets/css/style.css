@@ -20,8 +20,6 @@ h1 {
   font-family: 'Baloo Bhaina', cursive;
 }
 
-
-
 #response {
   text-align: left;
   padding: 10px;
@@ -39,29 +37,27 @@ h1 {
   color: #fff;
 }
 
-.flexscroll{
+.flexscroll {
   width: hidden;
-  height:200px;
-  overflow:scroll;
+  height: 200px;
+  overflow: scroll;
   overflow-x: hidden;
 }
 
-.flexscroll{
-  scrollbar-face-color: #FFFFFF;
-  scrollbar-shadow-color: #FFFFFF;
-  scrollbar-highlight-color: #FFFFFF;
-  scrollbar-3dlight-color: #FFFFFF;
-  scrollbar-darkshadow-color: #FFFFFF;
-  scrollbar-track-color: #FFFFFF;
-  scrollbar-arrow-color: #FFFFFF;
+.flexscroll {
+  scrollbar-face-color: #fff;
+  scrollbar-shadow-color: #fff;
+  scrollbar-highlight-color: #fff;
+  scrollbar-3dlight-color: #fff;
+  scrollbar-darkshadow-color: #fff;
+  scrollbar-track-color: #fff;
+  scrollbar-arrow-color: #fff;
 }
 
-/* Let's get this party started */
 .flexscroll::-webkit-scrollbar {
   width: 12px;
 }
  
-/* Handle */
 .flexscroll::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;

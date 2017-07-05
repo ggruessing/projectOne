@@ -17,7 +17,7 @@ var baseUrl = "https://api.api.ai/api/";
 
 var text;
 var name;
-var intro = true;
+var firstVisit = true;
 
 var connected = database.ref(".info/connected")
 
@@ -46,7 +46,7 @@ function setFirebaseUser(name) {
 }
 
 // Welcome user on page load
-if (intro) {
+if (firstVisit) {
 	var welcome = "Welcome, what is your name?";
   setResponse(welcome);
 }
@@ -65,8 +65,8 @@ $("#message-submit").on("click", function() {
   if (text) {
   	$("#input").val("");
 
-  	if (intro) {
-  		intro = false;
+  	if (firstVisit) {
+  		firstVisit = false;
   		name = text;
       setFirebaseUser(name);
   	}
@@ -123,6 +123,13 @@ function setResponse(val, name) {
 		name = "Cathy";
 	}
 	$("#response").append("<strong>" + name + ":</strong> " + val + "<br>");
+
+  // We put the repsonse div in a jquery object. Scrollheight is pure Javascript, so in order to call it, 
+  // we have to extract the pure Javascript html element by using [0]. We then call scrollHeight on it. 
+  // This returns the height of the scroll track. 
+  var scrollHeight = $("#response")[0].scrollHeight 
+  // We then put respoonse div in a jquery object and set it's scroll top to be the scroll Height. 
+  $("#response").scrollTop(scrollHeight)
 }  
 
 function getWeather() {
