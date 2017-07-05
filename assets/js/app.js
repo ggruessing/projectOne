@@ -19,6 +19,33 @@ var text;
 var name;
 var firstVisit = true;
 
+var connected = database.ref(".info/connected")
+
+// Check database for user
+function setFirebaseUser(name) {
+
+  var time = moment().format('MMM D YYYY, h:mm:ss a');
+
+  database.ref().child(name).once('value').then(function(snapshot) {
+    if (snapshot.val()) {
+      setResponse("Welcome back, " + text + "! Your last visit was " + 
+        snapshot.val().time + ". How can I help you?");
+      database.ref().child(name).set({
+        name: name,
+        time: time
+      });
+    }
+    else {
+      database.ref().child(name).set({
+        name: name,
+        time: time
+      });
+      setResponse("Hello, " + text + "! How can I help you?");
+    }
+  });
+}
+
+// Welcome user on page load
 if (firstVisit) {
 	var welcome = "Welcome, what is your name?";
   setResponse(welcome);
@@ -41,7 +68,7 @@ $("#message-submit").on("click", function() {
   	if (firstVisit) {
   		firstVisit = false;
   		name = text;
-  		setResponse("Hello, " + text + "! How can I help you?");
+      setFirebaseUser(name);
   	}
   	else {
   		console.log(text);
