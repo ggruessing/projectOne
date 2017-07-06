@@ -94,7 +94,7 @@ function send() {
   				getWeather();
 				}
 				else if (data.result.action === "web.search") {
-  				keyWord = data.result.parameters.q;
+  				keyWord = data.result.resolvedQuery;
   				getAnswers();
 				}
         else if (data.result.action === "delivery.search") {
@@ -165,21 +165,47 @@ function getAnswers() {
     }
   });
 }
-
+var id = "nothin"
 function getCooking () {
   $.ajax({
     type: "GET",
     url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients="+keyWord+"limitLicense=false&number=1&ranking=1",
     dataType: "json",
     headers: {
-      'X-Mashape-Key': 'm4zJZuWJy2mshhO2dtF7o0KquTb2p1qmP3cjsndgXgNyhJsj9a' 
+      'X-Mashape-Key': 'FAFDoCl0Z5mshe5M1YLER3AVJWgNp1gQkoyjsnlZvGQomCTd62' 
       // 'Accept: application/json' 
     }
   }).done(function(response) {
     results = response;
-    // console.log(results[0].title);
+    console.log(results);
+    id = results[0].id
     setResponse("With: " + keyWord + ". you can make: " + results[0].title);
+    getEating()
   }).fail(function() {
     setResponse("Ouch. I broke :(");
   })
 }  
+
+
+function getEating () {
+  $.ajax({
+    type: "GET",
+    url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/"+id+"/information",
+
+    dataType: "json",
+    headers: {
+      'X-Mashape-Key': 'FAFDoCl0Z5mshe5M1YLER3AVJWgNp1gQkoyjsnlZvGQomCTd62' 
+      // 'Accept: application/json' 
+    }
+  }).done(function(response) {
+    results = response;
+    console.log(results);
+    var link = '<a href='+results.spoonacularSourceUrl+' target="_blank">'+results.title+'</a>'
+    setResponse(link)
+  }).fail(function() {
+    setResponse("Ouch. I broke :(");
+  })
+}  
+
+
+
