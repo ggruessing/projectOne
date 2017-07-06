@@ -43,7 +43,7 @@ var connected = database.ref(".info/connected");
     // of different video formats to add
     src: [
       {
-        src: 'assets/images/bg.mp4',
+        src: 'assets/images/vid.mp4',
         type: 'video/mp4'
       }
     ],
