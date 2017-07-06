@@ -233,8 +233,8 @@ function getCooking () {
     }
   }).fail(function() {
     setResponse("Ouch. I broke :(");
-  })
-}  
+  });
+}
 
 // Recipe instructions
 function getEating () {
@@ -256,5 +256,5 @@ function getEating () {
     setResponse("Recipe link: " + link);
   }).fail(function() {
     setResponse("Ouch. I broke :(");
-  })
+  });
 }
