@@ -19,7 +19,41 @@ var text; // user's input
 var name; // user's name
 var firstVisit = true;
 
-var connected = database.ref(".info/connected")
+var connected = database.ref(".info/connected");
+
+// Video background using Bideo.js plugin
+(function () {
+
+  var bv = new Bideo();
+  bv.init({
+    // Video element
+    videoEl: document.querySelector('#background_video'),
+
+    // Container element
+    container: document.querySelector('body'),
+
+    // Resize
+    resize: true,
+
+    // autoplay: false,
+
+    isMobile: window.matchMedia('(max-width: 768px)').matches,
+
+    // Array of objects containing the src and type
+    // of different video formats to add
+    src: [
+      {
+        src: 'assets/images/vid.mp4',
+        type: 'video/mp4'
+      }
+    ],
+
+    // What to do once video loads (initial frame)
+    onLoad: function () {
+      document.querySelector('#video_cover').style.display = 'none';
+    }
+  });
+}());
 
 // Check database for user
 function setFirebaseUser(name) {
@@ -205,4 +239,4 @@ function getCooking () {
   }).fail(function() {
     setResponse("I think I understood you, but can you please repeat that?");
   })
-}  
+}
