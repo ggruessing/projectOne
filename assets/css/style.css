@@ -5,15 +5,12 @@ html, body {
 body {
   background-color: gray; 
   text-align: center;
-  /*background-image: url("waterandshit.gif");*/
-  /*background-size: cover;*/
-  /*background-repeat: no-repeat;*/
   color: #fff;
 }
 
 h1 {
   text-align: center;
-  font-family: 'Dhurjati', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 a, a:hover, a:active, a:visited {
@@ -28,7 +25,7 @@ video {
 
 #outsideContainer {
   overflow: hidden;
-  position: absolute;
+  position: absolute; 
   top: 0; left: 0; right: 0; bottom: 0;
 }
 
@@ -79,24 +76,31 @@ video {
   overflow-x: hidden;
 }
 
-.flexscroll {
-  scrollbar-face-color: #fff;
-  scrollbar-shadow-color: #fff;
-  scrollbar-highlight-color: #fff;
-  scrollbar-3dlight-color: #fff;
-  scrollbar-darkshadow-color: #fff;
-  scrollbar-track-color: #fff;
-  scrollbar-arrow-color: #fff;
-}
-
 .flexscroll::-webkit-scrollbar {
   width: 12px;
 }
  
-.flexscroll::-webkit-scrollbar-thumb {
+.flexscroll::-webkit-scrollbar-thumb { 
   -webkit-border-radius: 10px;
   border-radius: 10px;
   background: rgba(163, 163, 163, 0.4); 
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
+.btn-default {
+    background: rgba(0,0,0,0.5);
+    color: #F2F2F2;
+    -webkit-transition: background .2s ease-in-out, border .2s ease-in-out;
+    -moz-transition: background .2s ease-in-out, border .2s ease-in-out;
+    -o-transition: background .2s ease-in-out, border .2s ease-in-out;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+    border: 1px solid rgba(0,0,0,0.3);
+}
+
+.btn-default:hover,
+.btn-default:active,
+.btn-default:focus {
+    color: #F2F2F2;
+    background-color: rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.2);
+}
