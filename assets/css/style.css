@@ -3,7 +3,7 @@ html, body {
 }
 
 body {
-  background-color: black; 
+  background-color: gray; 
   text-align: center;
   /*background-image: url("waterandshit.gif");*/
   /*background-size: cover;*/
@@ -16,7 +16,7 @@ h1 {
   font-family: 'Dhurjati', sans-serif;
 }
 
-a, a:hover {
+a, a:hover, a:active, a:visited {
   color: #fff;
   text-decoration: underline;
 }

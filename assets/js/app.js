@@ -128,15 +128,14 @@ function send() {
   				getWeather();
 				}
 				else if (data.result.action === "web.search") {
-  				keyWord = data.result.parameters.q;
+  				keyWord = data.result.resolvedQuery;
   				getAnswers();
 				}
-        // else if (data.result.action === "delivery.search") {
-        //   keyWord = data.result.parameters.product.toString();
-        //   getCooking();
-        // }
+        else if (data.result.action === "delivery.search") {
+          keyWord = data.result.parameters.product.toString();
+          getCooking();
+        }
 			}
-
 			else {
 				setResponse(dataResult);
 				console.log(data);
@@ -200,43 +199,52 @@ function getAnswers() {
   });
 }
 
-// function getCooking () {
-//   Spoonacular API
-//   $.ajax({
-//     type: "GET",
-//     url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients="+keyWord+"limitLicense=false&number=1&ranking=1",
-//     dataType: "json",
-//     headers: {
-//       'X-Mashape-Key': 'm4zJZuWJy2mshhO2dtF7o0KquTb2p1qmP3cjsndgXgNyhJsj9a' 
-//       // 'Accept: application/json' 
-//     }
-//   }).done(function(response) {
-//     results = response;
-//     // console.log(results[0].title);
-//     setResponse("With: " + keyWord + ". you can make: " + results[0].title);
-//   }).fail(function() {
-//     setResponse("Ouch. I broke :(");
-//   })
+// Get recipe from ingredients
+var id; // recipe id
+var mashapeKey = 'FAFDoCl0Z5mshe5M1YLER3AVJWgNp1gQkoyjsnlZvGQomCTd62';
 
-//   Food2Fork
-//   var APIKey = "19a0bca9edabde12480e958093bbad7a";
-//   var queryURL = "https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=" + APIKey +
-//     "&q=" + keyWord;
+function getCooking () {
+  var queryURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients=" + keyWord + 
+    "limitLicense=false&number=1&ranking=1";
 
-//   $.ajax({
-//     type: "GET",
-//     url: queryURL,
-//     dataType: "json" 
-//   }).done(function(response) {
-//     console.log(response);
-//     setResponse("With: " + keyWord + ", you can make:");
-//     for (var i = 0; i < 3; i++) {
-//       var recipeLink = "<a href=" + response.recipes[i].source_url + 
-//       " target='_blank'>" + response.recipes[i].source_url + "</a>";
-//       console.log(recipeLink);
-//       setResponse(response.recipes[i].title + "<br>Recipe link: " + recipeLink);
-//     }
-//   }).fail(function() {
-//     setResponse("I think I understood you, but can you please repeat that?");
-//   })
-// }  
+  $.ajax({
+    type: "GET",
+    url: queryURL,
+    dataType: "json",
+    headers: {
+      'X-Mashape-Key': mashapeKey
+      // 'Accept: application/json' 
+    }
+  }).done(function(response) {
+    results = response;
+    console.log(results);
+    id = results[0].id;
+    setResponse("With: " + keyWord + " you can make: " + results[0].title);
+    getEating();
+  }).fail(function() {
+    setResponse("Ouch. I broke :(");
+  })
+}  
+
+// Recipe instructions
+function getEating () {
+  var queryURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + 
+    id + "/information";
+
+  $.ajax({
+    type: "GET",
+    url: queryURL,
+    dataType: "json",
+    headers: {
+      'X-Mashape-Key': mashapeKey
+      // 'Accept: application/json' 
+    }
+  }).done(function(response) {
+    results = response;
+    console.log(results);
+    var link = '<a href=' + results.spoonacularSourceUrl + ' target="_blank">' + results.title + '</a>';
+    setResponse("Recipe link: " + link);
+  }).fail(function() {
+    setResponse("Ouch. I broke :(");
+  })
+}
