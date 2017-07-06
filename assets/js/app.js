@@ -64,6 +64,9 @@ function setFirebaseUser(name) {
     if (snapshot.val()) {
       setResponse("Welcome back, " + text + "! Your last visit was " + 
         snapshot.val().time + ". How can I help you?");
+      var greet = "I'm sure you remember, but just in case: I can chat, answer most questions," + 
+        " tell you the weather or even suggest recipes. Just tell me what you have in the fridge!";
+      setResponse(greet);
       database.ref().child(name).set({
         name: name,
         time: time
@@ -75,6 +78,7 @@ function setFirebaseUser(name) {
         time: time
       });
       setResponse("Hello, " + text + "! How can I help you?");
+      setResponse("I can chat, answer most questions, tell you the weather or even suggest recipes. Just tell me what you have in the fridge!")
     }
   });
 }
@@ -205,7 +209,7 @@ var mashapeKey = 'FAFDoCl0Z5mshe5M1YLER3AVJWgNp1gQkoyjsnlZvGQomCTd62';
 
 function getCooking () {
   var queryURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients=" + keyWord + 
-    "limitLicense=false&number=1&ranking=1";
+    "&limitLicense=false&number=1&ranking=1";
 
   $.ajax({
     type: "GET",
@@ -217,6 +221,7 @@ function getCooking () {
     }
   }).done(function(response) {
     results = response;
+    console.log(queryURL);
     console.log(results);
     if (results.length > 0) {
       id = results[0].id;
