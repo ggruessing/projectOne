@@ -19,7 +19,41 @@ var text; // user's input
 var name; // user's name
 var firstVisit = true;
 
-var connected = database.ref(".info/connected")
+var connected = database.ref(".info/connected");
+
+// Video background using Bideo.js plugin
+(function () {
+
+  var bv = new Bideo();
+  bv.init({
+    // Video element
+    videoEl: document.querySelector('#background_video'),
+
+    // Container element
+    container: document.querySelector('body'),
+
+    // Resize
+    resize: true,
+
+    // autoplay: false,
+
+    isMobile: window.matchMedia('(max-width: 768px)').matches,
+
+    // Array of objects containing the src and type
+    // of different video formats to add
+    src: [
+      {
+        src: 'assets/images/vid.mp4',
+        type: 'video/mp4'
+      }
+    ],
+
+    // What to do once video loads (initial frame)
+    onLoad: function () {
+      document.querySelector('#video_cover').style.display = 'none';
+    }
+  });
+}());
 
 // Check database for user
 function setFirebaseUser(name) {
@@ -97,10 +131,10 @@ function send() {
   				keyWord = data.result.parameters.q;
   				getAnswers();
 				}
-        else if (data.result.action === "delivery.search") {
-          keyWord = data.result.parameters.product;
-          getCooking();
-        }
+        // else if (data.result.action === "delivery.search") {
+        //   keyWord = data.result.parameters.product.toString();
+        //   getCooking();
+        // }
 			}
 
 			else {
@@ -166,20 +200,43 @@ function getAnswers() {
   });
 }
 
-function getCooking () {
-  $.ajax({
-    type: "GET",
-    url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients="+keyWord+"limitLicense=false&number=1&ranking=1",
-    dataType: "json",
-    headers: {
-      'X-Mashape-Key': 'm4zJZuWJy2mshhO2dtF7o0KquTb2p1qmP3cjsndgXgNyhJsj9a' 
-      // 'Accept: application/json' 
-    }
-  }).done(function(response) {
-    results = response;
-    // console.log(results[0].title);
-    setResponse("With: " + keyWord + ". you can make: " + results[0].title);
-  }).fail(function() {
-    setResponse("Ouch. I broke :(");
-  })
-}  
+// function getCooking () {
+//   Spoonacular API
+//   $.ajax({
+//     type: "GET",
+//     url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients="+keyWord+"limitLicense=false&number=1&ranking=1",
+//     dataType: "json",
+//     headers: {
+//       'X-Mashape-Key': 'm4zJZuWJy2mshhO2dtF7o0KquTb2p1qmP3cjsndgXgNyhJsj9a' 
+//       // 'Accept: application/json' 
+//     }
+//   }).done(function(response) {
+//     results = response;
+//     // console.log(results[0].title);
+//     setResponse("With: " + keyWord + ". you can make: " + results[0].title);
+//   }).fail(function() {
+//     setResponse("Ouch. I broke :(");
+//   })
+
+//   Food2Fork
+//   var APIKey = "19a0bca9edabde12480e958093bbad7a";
+//   var queryURL = "https://cors-anywhere.herokuapp.com/http://food2fork.com/api/search?key=" + APIKey +
+//     "&q=" + keyWord;
+
+//   $.ajax({
+//     type: "GET",
+//     url: queryURL,
+//     dataType: "json" 
+//   }).done(function(response) {
+//     console.log(response);
+//     setResponse("With: " + keyWord + ", you can make:");
+//     for (var i = 0; i < 3; i++) {
+//       var recipeLink = "<a href=" + response.recipes[i].source_url + 
+//       " target='_blank'>" + response.recipes[i].source_url + "</a>";
+//       console.log(recipeLink);
+//       setResponse(response.recipes[i].title + "<br>Recipe link: " + recipeLink);
+//     }
+//   }).fail(function() {
+//     setResponse("I think I understood you, but can you please repeat that?");
+//   })
+// }  
