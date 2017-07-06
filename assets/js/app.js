@@ -218,9 +218,14 @@ function getCooking () {
   }).done(function(response) {
     results = response;
     console.log(results);
-    id = results[0].id;
-    setResponse("With: " + keyWord + " you can make: " + results[0].title);
-    getEating();
+    if (results.length > 0) {
+      id = results[0].id;
+      setResponse("With: " + keyWord + " you can make: " + results[0].title);
+      getEating();
+    }
+    else {
+      setResponse("Please provide me more ingredients.");
+    }
   }).fail(function() {
     setResponse("Ouch. I broke :(");
   })
